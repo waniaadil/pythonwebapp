@@ -56,20 +56,11 @@ def logout():
 
 @app.route("/home")
 def home():
-    form = PostForm()
-    if not (session.get('logged_in')):
-        return render_template('login.html')
-    else:    
-        return render_template('home.html')
-
+    return render_template('home.html',title='Home')
 
 @app.route("/about")
 def about():
-    form = PostForm()
-    if not (session.get('logged_in')):
-        return render_template('login.html')
-    else:
-        return render_template('about.html', title='About')
+    return render_template('about.html', title='About')
 
 
 @app.route("/register", methods=['GET', 'POST'])
