@@ -29,10 +29,14 @@ class User(db.Model):
 
 
 @app.route("/", methods=['GET','POST'])
-@app.route("/home" , methods=['GET','POST'])
-def home():
-    return render_template('home.html')
 
+@app.route("/register", methods=['POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -45,30 +49,20 @@ def login():
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route("/logout")
-def logout():
-    session['logged_in'] = False
-    return login()
-
-
-
 
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
 
 
-@app.route("/register", methods=['POST'])
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}', 'success')
-        return redirect(url_for('home'))
-    return render_template('register.html', title='Register', form=form)
+@app.route("/home" , methods=['GET','POST'])
+def home():
+    return render_template('home.html')
 
-
-
-
+@app.route("/logout")
+def logout():
+    session['logged_in'] = False
+    return login()
 
 
 #api call
