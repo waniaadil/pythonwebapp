@@ -28,7 +28,7 @@ class User(db.Model):
 
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['POST'])
 @app.route("/home")
 def home():
     return render_template('home.html')
@@ -58,7 +58,7 @@ def about():
     return render_template('about.html', title='About')
 
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/register", methods=['POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -82,13 +82,13 @@ def main():
     else :
         print ("please select the action")
 
-@app.route("/config/start", methods=['GET', 'POST'])
+@app.route("/config/start", methods=['POST'])
 def startInstance():
     ec2 = boto3.client('ec2')
     ec2.start_instances(InstanceIds=[instance_id] )
     return render_template('config1.html')
 
-@app.route("/config/stop", methods=['GET', 'POST'])
+@app.route("/config/stop", methods=['POST'])
 def stopInstance():
     ec2 = boto3.client('ec2')
     ec2.stop_instances(InstanceIds=[instance_id] )
