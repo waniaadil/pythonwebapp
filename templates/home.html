@@ -1,0 +1,34 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+<article class="media content-section">
+    <div class="media-body">
+
+<h1>Server List</h1>
+<h2>1. AWS</h2>
+
+
+<html>
+   <body>
+      <form action = "http://localhost:5000/config/start" method = "post">
+         <p><input type = "submit" name ="ON" value = "start" /></p>
+      </form>
+   </body>
+</html>
+
+
+<html>
+   <body>
+      <form action = "http://localhost:5000/config/stop" method = "post">
+         <p><input type = "submit"  name ="OFF" value = "stop" /></p>
+      </form>
+   </body>
+</html>
+
+
+</article>
+
+
+{% endblock content %}
+
