@@ -29,15 +29,6 @@ class User(db.Model):
 
 
 @app.route("/", methods=['GET', 'POST'])
-def index():
-    if not session.get('logged_in'):
-        return render_template('login.html')
-    else:
-        if not session.get('logged_in'):
-            return redirect(url_for('login'))
-        else:
-            return redirect(url_for('home'))
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
