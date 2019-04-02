@@ -29,6 +29,11 @@ class User(db.Model):
 
 
 @app.route("/", methods=['GET', 'POST'])
+@app.route("/home")
+def home():
+    return render_template('home.html')
+
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -45,9 +50,8 @@ def logout():
     session['logged_in'] = False
     return login()
 
-@app.route("/home")
-def home():
-    return render_template('home.html',title='Home')
+
+
 
 @app.route("/about")
 def about():
@@ -93,3 +97,4 @@ def stopInstance():
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port=5000 , debug=True)
+    

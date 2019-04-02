@@ -10,7 +10,7 @@ from botocore.exceptions import ClientError
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-instance_id ='i-0128971b12afa1401'
+instance_id ='i-0cf5eeb39ba7941be'
 action = 'ON'
 db = SQLAlchemy(app)
 
