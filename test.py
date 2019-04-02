@@ -1,4 +1,7 @@
-from datetime import datetime
+
+
+
+    from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect, session, abort, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
@@ -28,17 +31,13 @@ class User(db.Model):
 
 
 
-@app.route("/", methods=['GET', 'POST'])
-def index():
-    if not session.get('logged_in'):
-        return render_template('login.html')
-    else:
-        if not session.get('logged_in'):
-            return redirect(url_for('login'))
-        else:
-            return redirect(url_for('home'))
+@app.route("/", methods=['POST'])
+@app.route("/home")
+def home():
+    return render_template('home.html')
 
-@app.route("/login", methods=['GET', 'POST'])
+
+@app.route("/login", methods=['POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -54,25 +53,15 @@ def logout():
     session['logged_in'] = False
     return login()
 
-@app.route("/home")
-def home():
-    form = PostForm()
-    if not (session.get('logged_in')):
-        return render_template('login.html')
-    else:    
-        return render_template('home.html')
+
 
 
 @app.route("/about")
 def about():
-    form = PostForm()
-    if not (session.get('logged_in')):
-        return render_template('login.html')
-    else:
-        return render_template('about.html', title='About')
+    return render_template('about.html', title='About')
 
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/register", methods=['POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -96,13 +85,13 @@ def main():
     else :
         print ("please select the action")
 
-@app.route("/config/start", methods=['GET', 'POST'])
+@app.route("/config/start", methods=['POST'])
 def startInstance():
     ec2 = boto3.client('ec2')
     ec2.start_instances(InstanceIds=[instance_id] )
     return render_template('config1.html')
 
-@app.route("/config/stop", methods=['GET', 'POST'])
+@app.route("/config/stop", methods=['POST'])
 def stopInstance():
     ec2 = boto3.client('ec2')
     ec2.stop_instances(InstanceIds=[instance_id] )

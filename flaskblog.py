@@ -1,4 +1,7 @@
-from datetime import datetime
+
+
+
+    from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect, session, abort, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
@@ -34,7 +37,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=['POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
