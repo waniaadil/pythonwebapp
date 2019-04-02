@@ -28,13 +28,13 @@ class User(db.Model):
 
 
 
-@app.route("/", methods=['POST'])
-@app.route("/home")
+@app.route("/", methods=['GET','POST'])
+@app.route("/home" , methods=['GET','POST'])
 def home():
     return render_template('home.html')
 
 
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=['GET','POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
